@@ -14,10 +14,9 @@ headless:
           xpath: /html/body/div[2]/div[1]/div[5]/div/div/form/span[1]/input
           value: haochen1204
         action: text
-      - args:
-          by: xpath
-          xpath: /html/body/div[2]/div[1]/div[5]/div/div/form/span[2]/input
-        action: click
+      - action: keyboard
+        args:
+          keys: '\r\n'
       - action: waitload
       - args:
           by: xpath

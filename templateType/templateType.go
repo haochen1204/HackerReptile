@@ -17,6 +17,7 @@ type Info struct {
 type Step struct {
 	Args   Args   `yaml:"args"`
 	Action string `yaml:"action"`
+	Name   string `yaml:"name"`
 }
 
 type Args struct {
@@ -26,4 +27,5 @@ type Args struct {
 	Value     string `yaml:"value,omitempty"`
 	Target    string `yaml:"target,omitempty"`
 	Attribute string `yaml:"attribute,omitempty"`
+	Keys      string `yaml:"keys,omitempty"`
 }
