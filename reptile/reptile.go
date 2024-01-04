@@ -1,12 +1,19 @@
 package reptile
 
 import (
+	"HackerReptile/templateType"
 	"context"
 	"fmt"
 	"github.com/chromedp/chromedp"
 	"github.com/thep0y/go-logger/log"
 	"time"
 )
+
+func CreatActionQuery(steps []templateType.Step) {
+	for _, stepsVal := range steps {
+		fmt.Println(stepsVal.Action, stepsVal.Args)
+	}
+}
 
 func Test(url string) {
 	ctx, cancel := chromedp.NewContext(context.Background())

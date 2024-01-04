@@ -11,9 +11,7 @@ import (
 	"os"
 )
 
-var Url string
-var UrlList string
-var Cookie string
+var Yamlfile string
 
 var header = `
  _   _            _            ______           _   _ _      
@@ -60,12 +58,8 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.PersistentFlags().StringVarP(&Url, "url", "u", "", "爬取的url地址")
-	rootCmd.PersistentFlags().StringVarP(&UrlList, "list", "l", "", "爬取的url地址文件")
-	rootCmd.PersistentFlags().StringVarP(&Cookie, "cookie", "c", "", "设置cookie的值")
+	rootCmd.PersistentFlags().StringVarP(&Yamlfile, "yaml", "y", "", "使用的yaml文件")
 
 	// 绑定到viper
-	viper.BindPFlag("url", rootCmd.PersistentFlags().Lookup("url"))
-	viper.BindPFlag("list", rootCmd.PersistentFlags().Lookup("list"))
-	viper.BindPFlag("cookie", rootCmd.PersistentFlags().Lookup("cookie"))
+	viper.BindPFlag("yaml", rootCmd.PersistentFlags().Lookup("yaml"))
 }

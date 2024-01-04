@@ -1,0 +1,28 @@
+id: dvwa-headless-automatic-login
+info:
+  name: DVWA Headless Automatic Login
+  author: pdteam
+  Description: high
+headless:
+  - steps:
+      - args:
+          url: https://www.baidu.com
+        action: navigate
+      - action: waitload
+      - args:
+          by: xpath
+          xpath: /html/body/div[2]/div[1]/div[5]/div/div/form/span[1]/input
+          value: haochen1204
+        action: text
+      - args:
+          by: xpath
+          xpath: /html/body/div[2]/div[1]/div[5]/div/div/form/span[2]/input
+        action: click
+      - action: waitload
+      - args:
+          by: xpath
+          xpath: /html/body/div[3]/div[3]/div[1]/div[3]/div[1]/div/div[1]/h3/a
+          target: attribute
+          attribute: href
+        name: info
+        action: extract
