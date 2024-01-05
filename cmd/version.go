@@ -5,6 +5,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// 版本信息
 var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Print the version number of HackerReptile",
@@ -14,6 +15,9 @@ var versionCmd = &cobra.Command{
 	},
 }
 
+// init
+//
+//	@Description:
 func init() {
 	rootCmd.AddCommand(versionCmd)
 }

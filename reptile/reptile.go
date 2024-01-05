@@ -14,6 +14,10 @@ import (
 // 存储网页中获取的的变量
 var variables = make(map[string]interface{})
 
+// CreatActionQuery
+//
+//	@Description: 创建chromedp任务列表
+//	@param steps
 func CreatActionQuery(steps []templateType.Step) {
 	// 定义动作的存储列表
 	var actions []chromedp.Action
@@ -53,6 +57,10 @@ func CreatActionQuery(steps []templateType.Step) {
 	}
 }
 
+// RunAction
+//
+//	@Description: 开启chromdp任务
+//	@param actions
 func RunAction(actions []chromedp.Action) {
 	ctx, cancel := chromedp.NewContext(context.Background())
 	defer cancel()

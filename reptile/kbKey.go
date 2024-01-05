@@ -4,6 +4,11 @@ import (
 	"github.com/chromedp/chromedp/kb"
 )
 
+// GetKbKey
+//
+//	@Description: 用来将用户输入的键盘事件转换为chrmoedp给定的键盘
+//	@param key
+//	@return string
 func GetKbKey(key string) string {
 	switch key {
 	case "\b":

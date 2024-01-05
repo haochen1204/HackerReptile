@@ -8,10 +8,12 @@ import (
 )
 
 func Console() {
+	// 从参数获取yaml文件地址
 	yamlfile := viper.GetString("yaml")
 	if yamlfile == "" {
 		log.Error("请输入爬虫的yaml文件")
 	} else {
+		// 读取yaml文件
 		tmp := ReadYamlReptile(yamlfile)
 		// 循环遍历每一个Headless节点
 		for _, headlessVal := range tmp.Headless {

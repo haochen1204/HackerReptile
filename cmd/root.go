@@ -43,6 +43,10 @@ var rootCmd = &cobra.Command{
 
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
+
+// Execute
+//
+//	@Description:
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
@@ -50,6 +54,9 @@ func Execute() {
 	}
 }
 
+// init
+//
+//	@Description:
 func init() {
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,

@@ -7,6 +7,9 @@ import (
 	"HackerReptile/cmd"
 )
 
+// main
+//
+//	@Description: 主函数
 func main() {
 	cmd.Execute()
 }

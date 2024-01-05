@@ -1,5 +1,7 @@
 package templateType
 
+// Template
+// @Description: yaml文件格式
 type Template struct {
 	ID       string `yaml:"id"`
 	Info     Info   `yaml:"info"`
