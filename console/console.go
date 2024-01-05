@@ -7,6 +7,9 @@ import (
 	"github.com/thep0y/go-logger/log"
 )
 
+// Console
+//
+//	@Description: 处理命令行获取的参数与yaml模版文件
 func Console() {
 	// 从参数获取yaml文件地址
 	yamlfile := viper.GetString("yaml")
@@ -23,6 +26,11 @@ func Console() {
 	}
 }
 
+// ReadYamlReptile
+//
+//	@Description: 读取yaml模版文件
+//	@param yamlfile
+//	@return templateType.Template
 func ReadYamlReptile(yamlfile string) templateType.Template {
 	v := viper.New()
 	v.SetConfigFile(yamlfile) // 设置文件路径
