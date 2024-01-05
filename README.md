@@ -51,10 +51,15 @@ text                    # 输入内容
 keyboard                # 模拟键盘按键
     Args:
         keys:           # 模拟的按键
-        
-waitload                # 等待
+
+sleep                   # 等待
     Args:
         value:          # 等待的时间
+        
+waitload                # 等待加载
+    Args:
+        by: xpath       # 进行匹配的规则，暂时只支持xpath
+        xpath:          # 等待加载的元素路径
         
 extract                 # 获取内容
     Args:
