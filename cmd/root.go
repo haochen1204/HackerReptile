@@ -12,6 +12,7 @@ import (
 )
 
 var Yamlfile string
+var DebugFlag bool
 
 var header = `
  _   _            _            ______           _   _ _      
@@ -54,12 +55,13 @@ func init() {
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
 
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.HackerReptile.yaml)")
+	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config saveFile (default is $HOME/.HackerReptile.yaml)")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	rootCmd.PersistentFlags().StringVarP(&Yamlfile, "yaml", "y", "", "使用的yaml文件")
-
+	rootCmd.PersistentFlags().BoolVar(&DebugFlag, "debug", false, "是否开启调试模式（出现浏览器显示）")
 	// 绑定到viper
 	viper.BindPFlag("yaml", rootCmd.PersistentFlags().Lookup("yaml"))
+	viper.BindPFlag("debug", rootCmd.PersistentFlags().Lookup("debug"))
 }

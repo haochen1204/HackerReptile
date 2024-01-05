@@ -27,7 +27,7 @@ func ReadYamlReptile(yamlfile string) templateType.Template {
 	v.SetConfigType("yaml")   // 设置文件类型为yaml
 
 	if err := v.ReadInConfig(); err != nil { // 读取并解析文件
-		log.Error("Error reading config file, %s", err)
+		log.Error("Error reading config saveFile, %s", err)
 	}
 
 	var tmp templateType.Template

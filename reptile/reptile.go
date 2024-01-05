@@ -6,15 +6,18 @@ import (
 	"fmt"
 	"github.com/chromedp/chromedp"
 	"github.com/chromedp/chromedp/kb"
+	"github.com/spf13/viper"
 	"github.com/thep0y/go-logger/log"
 	"time"
 )
 
+// 存储网页中获取的的变量
+var variables = make(map[string]interface{})
+
 func CreatActionQuery(steps []templateType.Step) {
 	// 定义动作的存储列表
 	var actions []chromedp.Action
-	// 存储网页中获取的的变量
-	variables := make(map[string]interface{})
+
 	for _, stepsVal := range steps {
 		switch stepsVal.Action {
 		case "navigate":
@@ -28,8 +31,7 @@ func CreatActionQuery(steps []templateType.Step) {
 		case "extract":
 			var tmp string
 			actions = append(actions, chromedp.AttributeValue(stepsVal.Args.Xpath, stepsVal.Args.Attribute, &tmp, nil, chromedp.BySearch))
-			fmt.Println(tmp)
-			variables[stepsVal.Name] = tmp
+			variables[stepsVal.Name] = &tmp
 		case "keyboard":
 			actions = append(actions, chromedp.KeyEvent(kb.Enter))
 		}
@@ -37,19 +39,27 @@ func CreatActionQuery(steps []templateType.Step) {
 	actions = append(actions, chromedp.Sleep(10*time.Second))
 	RunAction(actions)
 	fmt.Println(variables)
+	for _, value := range variables {
+		a := value
+		if actualPointer, ok := a.(*string); ok {
+			fmt.Println("The value is: ", *actualPointer)
+		}
+	}
 }
 
 func RunAction(actions []chromedp.Action) {
 	ctx, cancel := chromedp.NewContext(context.Background())
 	defer cancel()
 
-	// 创建一个带有选项的新context，用于关闭无头模式
-	ctx, cancel = chromedp.NewExecAllocator(ctx,
-		append(chromedp.DefaultExecAllocatorOptions[:],
-			chromedp.Flag("headless", false), // 关闭无头模式
-		)...,
-	)
-	defer cancel()
+	if viper.GetBool("debug") {
+		// 创建一个带有选项的新context，用于关闭无头模式
+		ctx, cancel = chromedp.NewExecAllocator(ctx,
+			append(chromedp.DefaultExecAllocatorOptions[:],
+				chromedp.Flag("headless", false), // 关闭无头模式
+			)...,
+		)
+		defer cancel()
+	}
 
 	// 创建一个新的chromedp context
 	ctx, cancel = chromedp.NewContext(ctx)
@@ -61,33 +71,4 @@ func RunAction(actions []chromedp.Action) {
 	if err != nil {
 		log.Fatal(err)
 	}
-}
-
-func Test(url string) {
-	ctx, cancel := chromedp.NewContext(context.Background())
-	defer cancel()
-
-	var data string
-
-	// 创建一个带有选项的新context，用于关闭无头模式
-	ctx, cancel = chromedp.NewExecAllocator(ctx,
-		append(chromedp.DefaultExecAllocatorOptions[:],
-			chromedp.Flag("headless", false), // 关闭无头模式
-		)...,
-	)
-	defer cancel()
-
-	// 创建一个新的chromedp context
-	ctx, cancel = chromedp.NewContext(ctx)
-	defer cancel()
-
-	if err := chromedp.Run(ctx,
-		chromedp.Navigate(url),
-		chromedp.OuterHTML("html", &data, chromedp.ByQuery),
-		chromedp.Sleep(10*time.Second),
-	); err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(data)
 }

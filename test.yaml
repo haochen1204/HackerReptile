@@ -25,3 +25,10 @@ headless:
           attribute: href
         name: info
         action: extract
+      - args:
+          by: xpath
+          xpath: /html/body/div[3]/div[3]/div[1]/div[3]/div[4]/div/div[1]/h3/a
+          target: attribute
+          attribute: href
+        name: info2
+        action: extract
