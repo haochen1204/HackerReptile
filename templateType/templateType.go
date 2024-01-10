@@ -26,6 +26,11 @@ type Args struct {
 	URL       string `yaml:"url,omitempty"`
 	By        string `yaml:"by,omitempty"`
 	Xpath     string `yaml:"xpath,omitempty"`
+	Id        string `yaml:"id,omitempty"`
+	Jspath    string `yaml:"jspath,omitempty"`
+	Nodeid    string `yaml:"nodeid,omitempty"`
+	Query     string `yaml:"query,omitempty"`
+	Queryall  string `yaml:"queryall,omitempty"`
 	Value     string `yaml:"value,omitempty"`
 	Target    string `yaml:"target,omitempty"`
 	Attribute string `yaml:"attribute,omitempty"`

@@ -36,3 +36,10 @@ headless:
           attribute: href
         name: info2
         action: extract
+      - args:
+          by: jspath
+          jspath: document.querySelector("#\\33  > div > div:nth-child(1) > h3 > a")
+          target: attribute
+          attribute: href
+        name: info3
+        action: extract
