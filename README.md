@@ -72,6 +72,28 @@ extract                 # 获取内容
         name:            # 存放的参数名称
 ```
 
+### 支持获取元素的方法
+
+```
+by: xpath
+xpath:
+
+by: id
+id:
+
+by: jspath
+jspath: 
+
+by: nodeid
+nodeid:
+
+by: query
+query:
+
+by: queryall
+queryall:
+```
+
 ### 例子
 
 ```yaml
@@ -85,7 +107,9 @@ headless:
       - args:
           url: https://www.baidu.com
         action: navigate
-      - action: waitload
+      - action: sleep
+        args:
+          value: "1"
       - args:
           by: xpath
           xpath: /html/body/div[2]/div[1]/div[5]/div/div/form/span[1]/input
@@ -93,8 +117,10 @@ headless:
         action: text
       - action: keyboard
         args:
-          keys: '\r\n'
-      - action: waitload
+          keys: "\r"
+      - action: sleep
+        args:
+          value: "1"
       - args:
           by: xpath
           xpath: /html/body/div[3]/div[3]/div[1]/div[3]/div[1]/div/div[1]/h3/a
@@ -109,4 +135,12 @@ headless:
           attribute: href
         name: info2
         action: extract
+      - args:
+          by: jspath
+          jspath: document.querySelector("#\\33  > div > div:nth-child(1) > h3 > a")
+          target: attribute
+          attribute: href
+        name: info3
+        action: extract
+
 ```
