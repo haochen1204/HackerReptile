@@ -34,7 +34,7 @@ id: dvwa-headless-automatic-login
 info:
   name: DVWA Headless Automatic Login
   author: pdteam
-  Description: high
+  Description: 说明....
 ```
 
 ### 动作
@@ -46,10 +46,15 @@ navigate                # 访问
     
 text                    # 输入内容
     Args:
-        by: xpath       # 进行匹配的规则，暂时只支持xpath
+        by: xpath       # 进行匹配的规则
         xpath:          # xpath
         value:          # 输入的值
-      
+    
+client                  # 点击元素
+    Args:
+        by:             # 进行匹配的规则
+        xpath:          # xpath
+  
 keyboard                # 模拟键盘按键
     Args:
         keys:           # 模拟的按键
@@ -60,12 +65,12 @@ sleep                   # 等待
         
 waitload                # 等待加载
     Args:
-        by: xpath       # 进行匹配的规则，暂时只支持xpath
+        by: xpath       # 进行匹配的规则
         xpath:          # 等待加载的元素路径
         
 extract                 # 获取内容
     Args:
-        by: xpath        # 进行匹配的规则，暂时只支持xpath
+        by: xpath        # 进行匹配的规则
         xpath:           # xpath
         target:          # 获取的内容，如属性或text内容
         attribute:       # 具体的属性内容如href
