@@ -22,7 +22,7 @@
 
 适配nuclei模板：
 
-- [ ] 增加屏幕截图操作
+- [x] 增加屏幕截图操作
 - [ ] 增加执行javascript操作
 - [ ] 增加右键点击操作
 - [ ] 增加select选择器对html输入执行选择
@@ -103,6 +103,9 @@ extract                 # 获取内容
         target:          # 获取的内容，如属性或text内容
         attribute:       # 具体的属性内容如href
         name:            # 存放的参数名称
+screenshot               # 截图
+    Args:
+        to:              # 指定存放截图的文件
 ```
 
 ### 支持获取元素的方法

@@ -16,30 +16,36 @@ import (
 //	@return chromedp.Action
 //
 // ************************************
-func ActionHandle(s templateType.Step) chromedp.Action {
-	var action chromedp.Action
+func ActionHandle(s templateType.Step) []chromedp.Action {
+	var action []chromedp.Action
 	switch s.Action {
 	// 处理不需要获取元素的动作
 	case "navigate":
-		action = NavigateAciton(s.Args.URL)
+		action = append(action, NavigateAciton(s.Args.URL))
 	case "keyboard":
-		action = keyboardAction(s.Args.Keys)
+		action = append(action, keyboardAction(s.Args.Keys))
 	case "sleep":
-		action = sleepAction(s.Args.Value)
+		action = append(action, sleepAction(s.Args.Value))
+	case "screenshot":
+		var tmp []byte
+		var tmpAddr string
+		tmpAddr = s.Args.To + "/" + strconv.FormatInt(time.Now().UnixNano(), 10) + ".png"
+		pngs[&tmpAddr] = &tmp
+		action = append(action, screenshotAction(&tmp))
 	default:
 		// 处理需要获取动作的元素
 		t, v := HandleSelector(s.Args)
 		switch s.Action {
 		case "click":
-			action = ClientAction(t, v)
+			action = append(action, ClientAction(t, v))
 		case "text":
-			action = textAction(t, s.Args.Value, v)
+			action = append(action, textAction(t, s.Args.Value, v))
 		case "waitload":
-			action = waitloadAction(t, v)
+			action = append(action, waitloadAction(t, v))
 		case "extract":
 			var tmp string
-			variables[s.Name] = &tmp
-			action = extractAction(t, s.Args.Attribute, &tmp, v)
+			variables[&s.Name] = &tmp
+			action = append(action, extractAction(t, s.Args.Attribute, &tmp, v))
 		}
 	}
 	return action
@@ -166,4 +172,8 @@ func extractAction(s string, a string, v *string, f func(s *chromedp.Selector)) 
 // ************************************
 func keyboardAction(k string) chromedp.Action {
 	return chromedp.KeyEvent(GetKbKey(k))
+}
+
+func screenshotAction(b *[]byte) chromedp.Action {
+	return chromedp.FullScreenshot(b, 100)
 }

@@ -35,4 +35,5 @@ type Args struct {
 	Target    string `yaml:"target,omitempty"`
 	Attribute string `yaml:"attribute,omitempty"`
 	Keys      string `yaml:"keys,omitempty"`
+	To        string `yaml:"to"`
 }

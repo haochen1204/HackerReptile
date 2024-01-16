@@ -43,3 +43,6 @@ headless:
           attribute: href
         name: info3
         action: extract
+      - args:
+          to: ./
+        action: screenshot
