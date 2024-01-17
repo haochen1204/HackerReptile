@@ -23,7 +23,7 @@
 适配nuclei模板：
 
 - [x] 增加屏幕截图操作
-- [ ] 增加执行javascript操作
+- [x] 增加执行javascript操作
 - [ ] 增加右键点击操作
 - [ ] 增加select选择器对html输入执行选择
 - [ ] 增加上传文件操作
@@ -103,9 +103,14 @@ extract                 # 获取内容
         target:          # 获取的内容，如属性或text内容
         attribute:       # 具体的属性内容如href
         name:            # 存放的参数名称
+        
 screenshot               # 截图
     Args:
         to:              # 指定存放截图的文件
+
+script                   # 执行js
+    Args:               
+        code:            # 要执行的代码
 ```
 
 ### 支持获取元素的方法
@@ -178,5 +183,13 @@ headless:
           attribute: href
         name: info3
         action: extract
-
+      - args:
+          to: ./
+        action: screenshot
+      - args:
+          code: alert("123")
+        action: script
+      - args:
+          value: "3"
+        action: sleep
 ```

@@ -32,6 +32,8 @@ func ActionHandle(s templateType.Step) []chromedp.Action {
 		tmpAddr = s.Args.To + "/" + strconv.FormatInt(time.Now().UnixNano(), 10) + ".png"
 		pngs[&tmpAddr] = &tmp
 		action = append(action, screenshotAction(&tmp))
+	case "script":
+		action = append(action, scriptAction(s.Args.Code))
 	default:
 		// 处理需要获取动作的元素
 		t, v := HandleSelector(s.Args)
@@ -174,6 +176,27 @@ func keyboardAction(k string) chromedp.Action {
 	return chromedp.KeyEvent(GetKbKey(k))
 }
 
+// screenshotAction
+// ************************************
+//
+//	@Description: 处理屏幕截图动作
+//	@param b
+//	@return chromedp.Action
+//
+// ************************************
 func screenshotAction(b *[]byte) chromedp.Action {
 	return chromedp.FullScreenshot(b, 100)
+}
+
+// scriptAction
+// ************************************
+//
+//	@Description: 处理执行js动作
+//	@param c
+//	@return chromedp.Action
+//
+// ************************************
+func scriptAction(c string) chromedp.Action {
+	var tmp *[]byte
+	return chromedp.Evaluate(c, tmp)
 }

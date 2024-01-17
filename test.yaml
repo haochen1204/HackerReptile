@@ -46,3 +46,9 @@ headless:
       - args:
           to: ./
         action: screenshot
+      - args:
+          code: alert("123")
+        action: script
+      - args:
+          value: "3"
+        action: sleep
