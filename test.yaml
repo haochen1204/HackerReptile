@@ -44,10 +44,10 @@ headless:
         name: info3
         action: extract
       - args:
-          to: ./
+          to: ./pngs
         action: screenshot
       - args:
-          code: alert("123")
+          code: console.log("123123123")
         action: script
       - args:
           value: "3"

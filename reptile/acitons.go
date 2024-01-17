@@ -33,7 +33,9 @@ func ActionHandle(s templateType.Step) []chromedp.Action {
 		pngs[&tmpAddr] = &tmp
 		action = append(action, screenshotAction(&tmp))
 	case "script":
-		action = append(action, scriptAction(s.Args.Code))
+		var tmp []byte
+		tmps[&tmp] = &tmp
+		action = append(action, scriptAction(s.Args.Code, &tmp))
 	default:
 		// 处理需要获取动作的元素
 		t, v := HandleSelector(s.Args)
@@ -196,7 +198,6 @@ func screenshotAction(b *[]byte) chromedp.Action {
 //	@return chromedp.Action
 //
 // ************************************
-func scriptAction(c string) chromedp.Action {
-	var tmp *[]byte
-	return chromedp.Evaluate(c, tmp)
+func scriptAction(c string, t *[]byte) chromedp.Action {
+	return chromedp.Evaluate(c, t)
 }

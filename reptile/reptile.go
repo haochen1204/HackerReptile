@@ -14,6 +14,7 @@ import (
 // 存储网页中获取的的变量
 var variables = make(map[interface{}]interface{})
 var pngs = make(map[interface{}]interface{})
+var tmps = make(map[interface{}]interface{})
 
 // CreatActionQuery
 //
@@ -26,6 +27,7 @@ func CreatActionQuery(steps []templateType.Step) {
 	for _, stepsVal := range steps {
 		actions = append(actions, ActionHandle(stepsVal)...)
 	}
+
 	// 下面的代码是测试使用
 	//actions = append(actions, chromedp.Sleep(10*time.Second))
 	RunAction(actions)
