@@ -1,6 +1,7 @@
 package reptile
 
 import (
+	"HackerReptile/saveFile"
 	"HackerReptile/templateType"
 	"context"
 	"fmt"
@@ -12,7 +13,7 @@ import (
 )
 
 // 存储网页中获取的的变量
-var variables = make(map[interface{}]interface{})
+var variables = make(map[interface{}][]interface{})
 var pngs = make(map[interface{}]interface{})
 var tmps = make(map[interface{}]interface{})
 
@@ -32,14 +33,14 @@ func CreatActionQuery(steps []templateType.Step) {
 	//actions = append(actions, chromedp.Sleep(10*time.Second))
 	RunAction(actions)
 	fmt.Println(variables)
-	for key, value := range variables {
-		a := value
-		b := key.(*string)
-		if actualPointer, ok := a.(*string); ok {
-			fmt.Println(*b, " is: ", *actualPointer)
+	for key, values := range variables {
+		fmt.Println(key, " is: ")
+		for i, value := range values {
+			if actualPointer, ok := value.(*string); ok {
+				fmt.Println("Value ", i+1, ": ", *actualPointer)
+			}
 		}
 	}
-
 	for key, value := range pngs {
 		a := value
 		b := key.(*string)
@@ -58,6 +59,12 @@ func CreatActionQuery(steps []templateType.Step) {
 				log.Fatal(err)
 			}
 
+		}
+		// 测试代码结束
+
+		// 判断用户是否需要输出到csv表格中
+		if viper.GetBool("output") == true {
+			saveFile.SaveCSV(variables)
 		}
 	}
 }

@@ -48,7 +48,7 @@ func ActionHandle(s templateType.Step) []chromedp.Action {
 			action = append(action, waitloadAction(t, v))
 		case "extract":
 			var tmp string
-			variables[&s.Name] = &tmp
+			variables[s.Name] = append(variables[s.Name], &tmp)
 			action = append(action, extractAction(t, s.Args.Attribute, &tmp, v))
 		}
 	}

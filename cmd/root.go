@@ -13,6 +13,7 @@ import (
 
 var Yamlfile string
 var DebugFlag bool
+var SaveFileFlag bool
 
 var header = `
  _   _            _            ______           _   _ _      
@@ -68,7 +69,9 @@ func init() {
 	// when this action is called directly.
 	rootCmd.PersistentFlags().StringVarP(&Yamlfile, "yaml", "y", "", "使用的yaml文件")
 	rootCmd.PersistentFlags().BoolVar(&DebugFlag, "debug", false, "是否开启调试模式（出现浏览器显示）")
+	rootCmd.PersistentFlags().BoolVarP(&SaveFileFlag, "output", "o", false, "是否保存到csv表格中")
 	// 绑定到viper
 	viper.BindPFlag("yaml", rootCmd.PersistentFlags().Lookup("yaml"))
 	viper.BindPFlag("debug", rootCmd.PersistentFlags().Lookup("debug"))
+	viper.BindPFlag("output", rootCmd.PersistentFlags().Lookup("output"))
 }
